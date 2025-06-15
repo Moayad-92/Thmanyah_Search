@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SearchResult {
+  id                     Int       @id @default(autoincrement())
+  wrapperType            String?
+  kind                   String?
+  collectionId           Int?
+  trackId                Int       @unique
+  artistName             String?
+  collectionName         String?
+  trackName              String?
+  collectionCensoredName String?
+  trackCensoredName      String?
+  collectionViewUrl      String?
+  feedUrl                String?
+  trackViewUrl           String?
+  artworkUrl30           String?
+  artworkUrl60           String?
+  artworkUrl100          String?
+  artworkUrl600          String?
+  collectionPrice        Float?
+  trackPrice             Float?
+  collectionHdPrice      Float?
+  releaseDate            DateTime?
+  collectionExplicitness String?
+  trackExplicitness      String?
+  trackCount             Int?
+  trackTimeMillis        Int?
+  country                String?
+  currency               String?
+  primaryGenreName       String?
+  contentAdvisoryRating  String?
+  genreIds               String?
+  genres                 String?
+  createdAt              DateTime  @default(now())
+}
