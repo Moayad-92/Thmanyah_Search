@@ -1,0 +1,31 @@
+{
+  "name": "thmanyah-search-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@lucide/lab": "^0.1.2",
+    "autoprefixer": "^10.4.16",
+    "axios": "^1.9.0",
+    "lucide-react": "^0.515.0",
+    "next": "latest",
+    "postcss": "^8.4.24",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwind-scrollbar": "^4.0.2",
+    "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "eslint": "8.45.0",
+    "eslint-config-next": "13.5.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,10 +1,8 @@
 # === Root ===
 node_modules/
 dist/
-.env
 .DS_Store
 *.log
-*.env.*
 .next/
 out/
 coverage/
