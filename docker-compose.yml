@@ -1,0 +1,61 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: itunes_backend
+    ports:
+      - "5005:5000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+    # command: sh -c "npx prisma migrate deploy && npm run start:prod"
+    command: sh -c "npx prisma migrate dev --name init&& yarn build && yarn start:dev"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: itunes_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5005
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15
+    container_name: itunes_postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: itunesdb
+
+  prisma-studio:
+    image: node:18
+    container_name: itunes_prisma_studio
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5555:5555"
+    depends_on:
+      - db
+    command: sh -c "npm install && npx prisma generate && npx prisma studio --port 5555"
+    env_file:
+      - ./backend/.env
+
+volumes:
+  pgdata:
